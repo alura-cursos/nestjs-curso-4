@@ -1,4 +1,8 @@
-import { ClassSerializerInterceptor, Module } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  ConsoleLogger,
+  Module,
+} from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -42,6 +46,7 @@ import { AutenticacaoModule } from './modulos/autenticacao/autenticacao.module';
       provide: APP_INTERCEPTOR,
       useClass: ClassSerializerInterceptor,
     },
+    ConsoleLogger,
   ],
 })
 export class AppModule {}
