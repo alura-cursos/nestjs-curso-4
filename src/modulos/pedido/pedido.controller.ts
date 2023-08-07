@@ -50,10 +50,17 @@ export class PedidoController {
   }
 
   @Patch(':id')
-  atualizaPedido(
+  async atualizaPedido(
+    @Req() req: RequisicaoComUsuario,
     @Param('id') pedidoId: string,
     @Body() dadosDeAtualizacao: AtualizaPedidoDto,
   ) {
-    return this.pedidoService.atualizaPedido(pedidoId, dadosDeAtualizacao);
+    const usuarioId = req.usuario.sub;
+    const pedidoAtualizado = await this.pedidoService.atualizaPedido(
+      pedidoId,
+      dadosDeAtualizacao,
+      usuarioId,
+    );
+    return pedidoAtualizado;
   }
 }
